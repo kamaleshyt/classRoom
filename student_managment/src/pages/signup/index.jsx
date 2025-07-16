@@ -19,29 +19,46 @@ const index = () => {
 setValue({...value,[e.target.name]:e.target.value})
        }
   return (
-    <div>
-         <div class="signup-box">
-                <input type="text" 
-                       class="name ele" 
-                       name={'name'}
-                       placeholder="Enter your name" value={value.name} onChange={onChange}/>
-                <input type="email" 
-                       class="email ele"
-                       name={'email'} 
-                       placeholder="youremail@email.com"
-                       value={value.email}
-                       onChange={onChange}
-                       />
-                <input type="password" 
-                       class="password ele" 
-                       name={'password'}
-                       placeholder="password"
-                       value={value.password}
-                       onChange={onChange}
-                       />
-                <button class="clkbtn" onClick={onSubmit} >Signup</button>
-            </div>
-    </div>
+
+    <>
+      {/* container div */}
+      <div className="container">
+
+        {/* upper button section to select
+            the login or signup form */}
+        <div className="slider"></div>
+        <div className="btn">
+          <button className="login">Login</button>
+          <button className="signup">Signup</button>
+        </div>
+        
+        <div>
+          <div className="signup-box">
+            <input
+              type="text"
+              className="name ele"
+              placeholder="Enter your name"
+            />
+            <input
+              type="email"
+              className="email ele"
+              placeholder="youremail@email.com"
+            />
+            <input
+              type="password"
+              className="password ele"
+              placeholder="password"
+            />
+            <input
+              type="password"
+              className="password ele"
+              placeholder="Confirm password"
+            />
+            <button className="clkbtn">Signup</button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
