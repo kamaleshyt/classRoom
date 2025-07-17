@@ -1,4 +1,4 @@
-
+/*
 import Signin from './pages/signin/index.jsx';
 import Signup from './pages/signup/index.jsx';
 
@@ -8,6 +8,22 @@ function App() {
       <Signin />
       <Signup />
     </>
+  );
+}
+
+export default App;
+
+*/
+
+
+import React from "react";
+import ExamForm from "./examination/ExamForm";
+
+function App() {
+  return (
+    <div>
+      <ExamForm />
+    </div>
   );
 }
 
