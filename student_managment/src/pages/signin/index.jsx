@@ -18,22 +18,32 @@ const index = () => {
 setValue({...value,[e.target.name]:e.target.value})
        }
   return (
-    <div>
-          <div class="login-box">
-                <input type="email" 
-                       class="email ele" 
-                       name={'email'}
-                        onChange={onChange}
-                       placeholder="youremail@email.com"/>
-                <input type="password"
-                       class="password ele" 
-                        name={'password'}
-                        onChange={onChange}
-                       placeholder="password"/>
-                <button class="clkbtn" onClick={onSubmit}>Login</button>
-            </div>
+
+    <div className="container">
+      <div className="slider"></div>
+      
+      <div className="btn">
+        <button className="login">Login</button>
+        <button className="signup">Signup</button>
+      </div> 
+
+      <div className="login-box">
+        <input
+          type="email"
+          className="email ele"
+          placeholder="youremail@email.com"
+        />
+        <input
+          type="password"
+          className="password ele"
+          placeholder="password"
+        />
+        <button className="clkbtn">Login</button>
+      </div>
     </div>
   );
-}
+};
 
 export default index;
+
+

@@ -1,0 +1,96 @@
+/* General background and typography */
+.exam-form-background {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* Optional enhancement */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Form header */
+.exam-form-background h2 {
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 15px 20px;
+  margin-top: 30px;
+  border-radius: 6px;
+}
+
+/* Form container */
+.exam-form {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Form labels */
+.exam-form label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs, textarea, select */
+.exam-form input,
+.exam-form textarea,
+.exam-form select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Focus state for accessibility */
+.exam-form input:focus,
+.exam-form textarea:focus,
+.exam-form select:focus {
+  border-color: #007BFF;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* Submit button */
+.exam-form button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Button hover state */
+.exam-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .exam-form {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .exam-form-background h2 {
+    font-size: 18px;
+    padding: 10px;
+  }
+}
