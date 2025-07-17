@@ -1,40 +1,25 @@
 import React, { useState } from 'react';
 import '../index.style.css'
-import axios from 'axios'
-const api=axios.create({
-       baseURL:'http://localhost:5010/stasffs'
-})
+import { Box, Button, Dialog, Divider, IconButton, Table, Typography } from '@mui/material';
+import Form from './Form';
+import {Close} from '@mui/icons-material'
+import BasicTable from './TableData';
 
 const index = () => {
-       const [value,setValue]=useState({name:'',subject:''})
-
-       const onSubmit=async()=>{
-              try{
-                     await api.post('',value)
-              }catch(err){
-                     console.log(err)
-              }
-       }
-       const onChange=(e)=>{
-setValue({...value,[e.target.name]:e.target.value})
-       }
-  return (
-    <div>
-            <div class="staff-box">
-                    <input type="text" 
-                         class="name ele" 
-                         name={'name'}
-                            onChange={onChange}
-                         placeholder="Staff Name"/>
-                    <input type="text"
-                         class="subject ele" 
-                            name={'subject'}
-                            onChange={onChange}
-                         placeholder="Subject"/>
-                    <button class="clkbtn" onClick={onSubmit}>Add Staff</button>
-                </div>
-    </div>
-  );
+       const [isFormOpen,setIsFormOpen]=useState(false)
+  return <Box>
+       <Button onClick={()=>setIsFormOpen(true)} variant='contained' sx={{marginLeft:'auto'}}>Add</Button>
+  <BasicTable/>
+  <Dialog open={isFormOpen} maxWidth={'md'} fullWidth={true}>
+       <Box sx={{height:'400px'}}>
+              <Box sx={{display:'flex',m:2,justifyContent:'space-between'
+                     ,alignItems:'center'}}>
+                            <Typography sx={{fontSize:'1.3rem'}}>Add Staff</Typography>
+              <IconButton onClick={()=>setIsFormOpen(false)}><Close/></IconButton> </Box>
+             <Divider/>
+             <Box sx={{m:2}}>
+              <Form/></Box></Box></Dialog>
+  </Box>
 }
 
 export default index;

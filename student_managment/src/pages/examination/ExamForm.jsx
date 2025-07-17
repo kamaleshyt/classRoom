@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './ExamForm.css'; 
 import axios from 'axios'
 const api=axios.create({
-       baseURL:'http://localhost:5010/exam
-       '
+       baseURL:'http://localhost:5010/exam'
 })
 
 const ExamForm = () => {
