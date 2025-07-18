@@ -27,7 +27,7 @@ function App() {
   return (
     <Box>
       <Box sx={{width:"250px"}}><SideBar/></Box>
-      <Box sx={{ml:"250px"}}> { selectedForm.component}</Box>
+      <Box sx={{ml:"250px",}}> { selectedForm.component}</Box>
     
     </Box>
   );
