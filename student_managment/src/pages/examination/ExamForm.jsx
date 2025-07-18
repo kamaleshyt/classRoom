@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
-import './ExamForm.css'; 
-import axios from 'axios'
-const api=axios.create({
-       baseURL:'http://localhost:5010/exam'
-})
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  TextField,
+  Box,
+  Button,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@mui/material";
+
+const api = axios.create({
+  baseURL: "http://localhost:5010/exam"
+});
 
 const ExamForm = () => {
   const [formData, setFormData] = useState({
@@ -15,92 +28,153 @@ const ExamForm = () => {
     details: '',
   });
 
+  const [submittedData, setSubmittedData] = useState(null);
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    setFormData({ 
+      ...formData, 
+      [e.target.name]: e.target.value 
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can replace this with real submission logic
-    console.log('Form submitted:', formData);
-    alert('Form submitted successfully!');
-    setFormData({
-      studentName: '',
-      rollNumber: '',
-      subjectName: '',
-      subjectCode: '',
-      examDate: '',
-      details: '',
-    });
+    try {
+      const response = await api.post("/", formData);
+      console.log("Server response:", response.data);
+      alert("Form submitted successfully!");
+      setSubmittedData(formData);
+      setFormData({
+        studentName: '',
+        rollNumber: '',
+        subjectName: '',
+        subjectCode: '',
+        examDate: '',
+        details: '',
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Submission failed. Check console.");
+    }
   };
 
   return (
-    <div className="exam-form-background">
-      <h2>Student Examination Subject Details Form</h2>
-      <form onSubmit={handleSubmit} className="exam-form">
-        <label htmlFor="studentName">Student Name</label>
-        <input
-          type="text"
-          id="studentName"
-          name="studentName"
-          value={formData.studentName}
-          onChange={handleChange}
-          required
-        />
+    <Box
+      sx={{
+        minHeight: "100vh",
+        background: "linear-gradient(to right, #6a11cb, #2575fc)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        p: 2
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 600,
+          backgroundColor: "white",
+          borderRadius: 4,
+          boxShadow: 4,
+          p: 4
+        }}
+      >
+        <Typography variant="h5" sx={{ mb: 3, textAlign: "center" }}>
+          Student Examination Subject Details Form
+        </Typography>
 
-        <label htmlFor="rollNumber">Roll Number</label>
-        <input
-          type="text"
-          id="rollNumber"
-          name="rollNumber"
-          value={formData.rollNumber}
-          onChange={handleChange}
-          required
-        />
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Student Name"
+            name="studentName"
+            fullWidth
+            value={formData.studentName}
+            onChange={handleChange}
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Roll Number"
+            name="rollNumber"
+            fullWidth
+            value={formData.rollNumber}
+            onChange={handleChange}
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Subject Name"
+            name="subjectName"
+            fullWidth
+            value={formData.subjectName}
+            onChange={handleChange}
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Subject Code"
+            name="subjectCode"
+            fullWidth
+            value={formData.subjectCode}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Exam Date"
+            type="date"
+            name="examDate"
+            fullWidth
+            value={formData.examDate}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Additional Details"
+            name="details"
+            fullWidth
+            multiline
+            rows={4}
+            value={formData.details}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+          <Button variant="contained" type="submit" fullWidth>
+            Submit
+          </Button>
+        </form>
 
-        <label htmlFor="subjectName">Subject Name</label>
-        <input
-          type="text"
-          id="subjectName"
-          name="subjectName"
-          value={formData.subjectName}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="subjectCode">Subject Code</label>
-        <input
-          type="text"
-          id="subjectCode"
-          name="subjectCode"
-          value={formData.subjectCode}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="examDate">Examination Date</label>
-        <input
-          type="date"
-          id="examDate"
-          name="examDate"
-          value={formData.examDate}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="details">Additional Details</label>
-        <textarea
-          id="details"
-          name="details"
-          rows="4"
-          value={formData.details}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        {submittedData && (
+          <TableContainer component={Paper} sx={{ mt: 4 }}>
+            <Typography variant="h6" sx={{ p: 2 }}>
+              Submitted Data Summary
+            </Typography>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Student Name</TableCell>
+                  <TableCell>Roll Number</TableCell>
+                  <TableCell>Subject Name</TableCell>
+                  <TableCell>Subject Code</TableCell>
+                  <TableCell>Exam Date</TableCell>
+                  <TableCell>Details</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{submittedData.studentName}</TableCell>
+                  <TableCell>{submittedData.rollNumber}</TableCell>
+                  <TableCell>{submittedData.subjectName}</TableCell>
+                  <TableCell>{submittedData.subjectCode}</TableCell>
+                  <TableCell>{submittedData.examDate}</TableCell>
+                  <TableCell>{submittedData.details}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </Box>
+    </Box>
   );
 };
 
